@@ -32,7 +32,7 @@ int main()
     insert(30);
     insert(40);
     //Uncomment for Collision Case
-    //insert(3)
+    //insert(3);
     for (auto x : table) {
         std::cout << x << std::endl;
     }
