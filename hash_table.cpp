@@ -1,36 +1,39 @@
 #include <iostream>
-#include <stdint.h>
 #include <vector>
-#include <list>
 
+// Hash table size
+const int TABLE_SIZE = 10;
 
-int hash_function(int x, int capacity) {
-    return (x % capacity);
+// Hash table
+std::vector<int> table(TABLE_SIZE, -1);
+
+// Function to insert a key into the hash table
+void insert(int key)
+{
+    // Find the hash value of the key
+    int hash = key % TABLE_SIZE;
+
+    // If the slot is not empty, linear probing is used
+    while (table[hash] != -1)
+    {
+        // Move to the next slot
+        hash = (hash + 1) % TABLE_SIZE;
+    }
+
+    // Insert the key in the empty slot
+    table[hash] = key;
 }
 
 int main()
 {
-    //No Collision(Uncomment to see case)
-    //std::vector<int> key = {14,20,17,23,25};
-    //
-    //Collision Case
-    //std::vector<int> key = { 14,20,17,23,25,27 };
-
-    std::vector<int> table(10, NULL);
-    for (int i = 0; i < key.size(); i++) {
-        int index = hash_function(key[i], table.capacity());
-        
-        while (table[index] != NULL) {
-            if (index >= table.capacity()) {
-                index %= index;
-            }
-            index++;
-        }
-        table[index] = key[i];
-    }
-    
+    // Insert some keys into the hash table
+    insert(10);
+    insert(20);
+    insert(30);
+    insert(40);
+    insert(3);
     for (auto x : table) {
         std::cout << x << std::endl;
     }
+    return 0;
 }
-
